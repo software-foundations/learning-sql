@@ -43,7 +43,18 @@ FLUSH PRIVILEGES;
 SELECT user,authentication_string,plugin,host FROM mysql.user;
 
 # creating a dedicated user
-CREATE USER 'sammy'@'localhost' IDENTIFIED BY 'password';
+	# installing the plugin to change password validate policy
+	# https://stackoverflow.com/questions/55237257/mysql-validate-password-policy-unknown-system-variable
+	select plugin_name, plugin_status from information_schema.plugins where plugin_name like 'validate%';
+	install plugin validate_password soname 'validate_password.so';
+	SHOW VARIABLES LIKE 'validate_password%';
+
+		# alter the password policy
+		# http://www.lamimdba.com.br/2018/04/dica-error-1819-hy000-your-password.html
+	SET GLOBAL validate_password_policy=LOW;
+	SET GLOBAL validate_password.policy=LOW;
+
+CREATE USER 'bruno'@'localhost' IDENTIFIED BY '#cl1entbrun0pwd';
 
 # grant permissons to user
 GRANT ALL PRIVILEGES ON *.* TO 'sammy'@'localhost' WITH GRANT OPTION;

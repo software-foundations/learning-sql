@@ -24,6 +24,7 @@ service mysql start
 mysql_secure_installation
 
 # connecting
+sudo su -
 mysql -u root -p
 
 # verify authentication methods

@@ -87,3 +87,21 @@ docker-compose --version
 docker-compose up -d
 
 # check if the container is alive
+
+#############
+# mysql container
+
+# 01: create the docker-compose.yml inside this current work directory
+# 02: up the container
+
+# way 1: with all logs
+docker-compose up
+
+# way 1: with no logs
+docker-compose up -d
+
+# see active containers
+docker ps
+
+# stop a docker container
+docker stop <three_first_CONTAINER_ID>

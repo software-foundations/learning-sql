@@ -109,3 +109,6 @@ SHOW DATABASES
 
 # exit mysql
 exit
+
+# stop mysql server
+sudo /etc/init.d/mysql stop

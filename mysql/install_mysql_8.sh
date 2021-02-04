@@ -54,7 +54,11 @@ SELECT user,authentication_string,plugin,host FROM mysql.user;
 	SET GLOBAL validate_password_policy=LOW;
 	SET GLOBAL validate_password.policy=LOW;
 
+<<<<<<< HEAD
 CREATE USER 'bruno'@'localhost' IDENTIFIED BY '#cl1entbrun0pwd';
+=======
+CREATE USER 'bruno'@'localhost' IDENTIFIED BY 'password';
+>>>>>>> (mysql/install_mysql_8.sh, at /) -> untill set global validate_password.policy=LOW
 
 # grant permissons to user
 GRANT ALL PRIVILEGES ON *.* TO 'sammy'@'localhost' WITH GRANT OPTION;

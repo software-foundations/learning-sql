@@ -62,3 +62,28 @@ sudo rm -rf /var/lib/docker
 
 ###########
 # You must delete any edited configuration files manually.
+
+###########
+# Docker compose
+# https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04-pt
+
+# download the relase 1.26.0 and save the executable file /usr/local/bin/docker-compose
+# to be acessable globally
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+# Set permission +x to allow execution
+sudo chmod +x /usr/local/bin/docker-compose
+
+# check if the installation is ok
+docker-compose --version
+
+##############
+# Setting the docker-compose.yml
+
+#############
+# Executing the docker compose
+
+# Download the necessary docker images, create a container, and execute the containerized envyronment in background, like a daemon
+docker-compose up -d
+
+# check if the container is alive

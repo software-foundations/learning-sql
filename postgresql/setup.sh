@@ -77,3 +77,57 @@ sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_
 sudo apt update
 
 sudo apt install pgadmin4
+
+# -> creating dvdrental database
+# https://www.postgresqltutorial.com/postgresql-restore-database/
+
+# step 01
+sudo -iu root
+psql
+CREATE DATABASE dvdrental;
+\connect dvdrental
+\conninfo
+\q
+
+# step 02
+# way 01
+# cd /etc/postgresql/12/main/ # does not work
+cd /usr/lib/postgresql/12/bin/
+pg_restore --dbname=dvdrental --verbose c:\pgbackup\dvdrental.tar
+
+pg_restore --dbname=dvdrental --create --verbose c:\pgbackup\dvdrental.tar
+
+# way 02 (preferred. USE THIS)
+# https://www.postgresqltutorial.com/postgresql-backup-database/
+cd /usr/lib/postgresql/12/bin/
+pg_dump -U postgres -W -F t dvdrental > path/to/dvdrental.tar
+
+# way 03
+# https://www.geeksforgeeks.org/postgresql-loading-a-database/
+cd /usr/lib/postgresql/12/bin/
+pg_restore -U postgres -d dvdrental path/to/dvdrental.tar
+
+# way 04
+# youtube
+# postgresql - how to backup and restore database
+pg_dump --help
+pg_dump -Fc -h 127.0.0.1 -p 5432 -U root dvrental -f dvdrental.dump
+ls -la | grep rental
+
+sudo su - postgres
+createdb --help
+createdb dvdrental -O root
+logout
+
+ph_restore --help
+pg_restore -d dvdrental -h 127.0.0.1 -U root /path/to/dvdrental.dump
+
+# way 05
+# https://stackoverflow.com/questions/64633663/restoring-a-postgres-database-hangs-with-no-error
+pg_restore --dbname=DatabaseName -Upostgres --format=tar example.tar
+# step 03
+psql
+
+# step 04
+# USE dvdrental; # does not work
+\c dvdrental

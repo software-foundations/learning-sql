@@ -1,5 +1,5 @@
-# \connect 01_test
-# \conninfo
+-- \connect 01_test
+-- \conninfo
 
 -- DONE
 create table departamentos (

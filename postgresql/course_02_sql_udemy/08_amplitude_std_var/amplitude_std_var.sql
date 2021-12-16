@@ -40,7 +40,7 @@ ORDER BY
 */
 
 SELECT
-	maquina,	
+	maquina,
 	MAX(qtd) AS "maximum",
 	MIN(qtd) AS "minimum",
 	MAX(qtd) - MIN(qtd) as "amplitude"
@@ -52,7 +52,7 @@ ORDER BY
 	4 DESC;
 
 /*
-	  maquina   | maximum | minimum | amplitude 
+	  maquina   | maximum | minimum | amplitude
 	------------+---------+---------+-----------
 	 Maquina 01 |   35.00 |    0.00 |     35.00
 	 Maquina 02 |   43.00 |   14.50 |     28.50
@@ -78,10 +78,38 @@ ORDER BY
 	4 DESC;
 
 /*
-	  maquina   | average | maximum | minimum | amplitude             
-	------------+---------+---------+---------+-----------            
-	 Maquina 02 |   17.80 |   43.00 |   14.50 |     28.50            
-	 Maquina 03 |   15.00 |   25.00 |   10.00 |     15.00            
-	 Maquina 01 |   15.00 |   35.00 |    0.00 |     35.00            
+	  maquina   | average | maximum | minimum | amplitude
+	------------+---------+---------+---------+-----------
+	 Maquina 02 |   17.80 |   43.00 |   14.50 |     28.50
+	 Maquina 03 |   15.00 |   25.00 |   10.00 |     15.00
+	 Maquina 01 |   15.00 |   35.00 |    0.00 |     35.00
+	(3 rows)
+*/
+
+/*
+-> 04: Standard Deviation and Variance
+*/
+
+SELECT
+	maquina,
+	ROUND(AVG(qtd), 2) AS "avg",
+	MAX(qtd) AS "max",
+	MIN(qtd) AS "min",
+	MAX(qtd) - MIN(qtd) AS "amp",
+	ROUND(STDDEV_POP(qtd), 2) AS "std. dev",
+	ROUND(VAR_POP(qtd), 2) AS "var"
+FROM
+	maquinas
+GROUP BY
+	maquina
+ORDER BY
+	4 DESC;
+
+/*
+	  maquina   |  avg  |  max  |  min  |  amp  | std. dev |  var
+	------------+-------+-------+-------+-------+----------+--------
+	 Maquina 02 | 17.80 | 43.00 | 14.50 | 28.50 |     8.40 |  70.61
+	 Maquina 03 | 15.00 | 25.00 | 10.00 | 15.00 |     4.47 |  20.00
+	 Maquina 01 | 15.00 | 35.00 |  0.00 | 35.00 |    11.16 | 124.60
 	(3 rows)
 */
